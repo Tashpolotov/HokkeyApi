@@ -1,11 +1,13 @@
 package com.example.domain.repository
 
-import com.example.domain.model.HockeyModel
+import com.example.domain.model.HockeyPlayerModel
 import com.example.domain.model.HockeyTeamModel
+
 
 interface HockeyRepository {
 
-    fun getImageTeamFirs() : HockeyModel
+    fun getImageTeamFirs() : HockeyTeamModel
 
-    fun getResultTeam() : List<HockeyTeamModel>
+    fun getPlayer() : HockeyPlayerModel
+
 }

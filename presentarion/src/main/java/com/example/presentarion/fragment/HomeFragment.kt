@@ -7,14 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.domain.model.HockeyModel
-import com.example.presentarion.R
 import com.example.presentarion.adapter.HockeyAdapter
 import com.example.presentarion.databinding.FragmentHomeBinding
+import com.example.presentarion.model.HockeyScoreModel
 import com.example.presentarion.viewmodel.HockeyViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
@@ -24,7 +21,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
+        savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -37,31 +34,42 @@ class HomeFragment : Fragment() {
         init()
     }
 
+    private fun adapterInit() {
+        val adapter = HockeyAdapter()
+        binding.rvHomeLive.adapter = adapter
+
+
+        // Создаем и заполняем список hockeyScoreList
+        val hockeyScoreList: List<HockeyScoreModel> = listOf(
+            HockeyScoreModel("", "", 2, 85, 15, 40),
+            HockeyScoreModel("", "", 4, 80, 10, 60),
+            HockeyScoreModel("", "", 1, 8, 7, 18)
+        )
+        adapter.submitList(hockeyScoreList)
+    }
+
+
     private fun init() {
-    lifecycleScope.launchWhenCreated {
-        viewModel.hockey.collect{
-            it.game.let {
-                binding.tvLiveTeamName.text = it?.firstTeamScore
-                binding.tvTeamSecondName.text = it?.nameSecondTeam
-                binding.tvLiveTime.text = it?.liveTime.toString()
-                binding.tvLivePart.text = it?.part.toString()
-                binding.tvScroll.text = it?.firstTeamScore
-                binding.tvSecondTeamScroll.text = it?.secondTeamScore
-                binding.tvNamePlayer.text = it?.namePlayer
-                binding.tvLiveShotSaveGoal.text = it?.titleSavePlayer
+        lifecycleScope.launchWhenCreated {
+            viewModel.hockey.collect { state ->
+                state.team?.let { team ->
+                    binding.tvLiveTeamName.text = team.firstTeamScore
+                    binding.tvTeamSecondName.text = team.nameSecondTeam
+                    binding.tvLiveTime.text = team.liveTime.toString()
+                    binding.tvLivePart.text = team.part.toString()
+                    binding.tvScroll.text = team.firstTeamScore
+                    binding.tvSecondTeamScroll.text = team.secondTeamScore
+                }
+
+                state.player?.let { player ->
+                    binding.tvNamePlayer.text = player.namePlayer
+                    binding.tvLiveShotSaveGoal.text = player.titleSavePlayer
+                }
 
             }
-            adapter.submitList(it.liveGame)
+
 
         }
-    }
         viewModel.loadHockeyGame()
     }
-
-    private fun adapterInit() {
-        binding.rvHomeLive.adapter = adapter
-    }
-
-
-
 }
