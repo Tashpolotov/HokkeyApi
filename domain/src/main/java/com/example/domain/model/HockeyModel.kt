@@ -11,6 +11,13 @@ data class HockeyModel(
     val titleSavePlayer : String,
     val namePlayer: String,
     val imgPlayer : String
+)
 
-
+data class HockeyTeamModel(
+    val imgFirstTeam: String,
+    val imgSecondteam: String,
+    val scoreFirstTeam: Int,
+    val scoreSecondTeam: Int,
+    val part : Int,
+    val time: Int
 )

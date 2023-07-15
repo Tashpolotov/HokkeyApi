@@ -51,6 +51,8 @@ class HomeFragment : Fragment() {
                 binding.tvLiveShotSaveGoal.text = it?.titleSavePlayer
 
             }
+            adapter.submitList(it.liveGame)
+
         }
     }
         viewModel.loadHockeyGame()

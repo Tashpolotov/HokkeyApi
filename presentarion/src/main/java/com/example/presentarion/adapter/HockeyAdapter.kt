@@ -6,14 +6,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.model.HockeyModel
+import com.example.domain.model.HockeyTeamModel
 import com.example.presentarion.databinding.ItemGameScoreBinding
 
-class HockeyAdapter:ListAdapter<HockeyModel, HockeyAdapter.HockeyViewHolder>(HockeyDiffutil()) {
+class HockeyAdapter:ListAdapter<HockeyTeamModel, HockeyAdapter.HockeyViewHolder>(HockeyDiffutil()) {
     inner class HockeyViewHolder (private val binding: ItemGameScoreBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(model: HockeyModel) {
-            binding.tvPart.text = model.part
-            binding.tvScoreTeamFirst.text = model.firstTeamScore
-            binding.tvScoreTeamSecond.text = model.secondTeamScore
+        fun bind(model: HockeyTeamModel) {
+            binding.tvPart.text = model.part.toString()
+            binding.tvScoreTeamSecond.text = model.scoreSecondTeam.toString()
+            binding.tvScoreTeamFirst.text = model.scoreFirstTeam.toString()
+            binding.tvTime.text = model.time.toString()
 
         }
 
@@ -28,12 +30,12 @@ class HockeyAdapter:ListAdapter<HockeyModel, HockeyAdapter.HockeyViewHolder>(Hoc
     }
 }
 
-class HockeyDiffutil:DiffUtil.ItemCallback<HockeyModel>() {
-    override fun areItemsTheSame(oldItem: HockeyModel, newItem: HockeyModel): Boolean {
+class HockeyDiffutil:DiffUtil.ItemCallback<HockeyTeamModel>() {
+    override fun areItemsTheSame(oldItem: HockeyTeamModel, newItem: HockeyTeamModel): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: HockeyModel, newItem: HockeyModel): Boolean {
+    override fun areContentsTheSame(oldItem: HockeyTeamModel, newItem: HockeyTeamModel): Boolean {
         return oldItem == newItem
     }
 
