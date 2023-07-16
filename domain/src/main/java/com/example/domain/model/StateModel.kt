@@ -4,5 +4,4 @@ data class StateModel (
 
     val team: HockeyTeamModel?,
     val player: HockeyPlayerModel?
-
         )

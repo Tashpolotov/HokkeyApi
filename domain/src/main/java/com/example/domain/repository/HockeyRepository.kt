@@ -5,7 +5,7 @@ import com.example.domain.model.HockeyTeamModel
 
 
 interface HockeyRepository {
-
+    fun saveHockeyScore(hockeyTeam: HockeyTeamModel)
     fun getImageTeamFirs() : HockeyTeamModel
 
     fun getPlayer() : HockeyPlayerModel

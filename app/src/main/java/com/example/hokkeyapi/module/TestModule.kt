@@ -21,4 +21,5 @@ class TestModule {
     fun getUseCase(repository: HockeyRepository) : HockeyUseCase {
         return HockeyUseCase(repository)
     }
+
 }
