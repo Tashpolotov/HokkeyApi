@@ -1,30 +1,37 @@
 package com.example.presentarion.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.example.domain.model.HockeyTeamModel
-import com.example.domain.model.StateModel
-import com.example.domain.repository.HockeyRepository
-import com.example.domain.usecase.HockeyUseCase
-import com.example.presentarion.model.HockeyScoreModel
+import com.example.domain.model.GameAvailable
+import com.example.domain.model.HockeyGame
+import com.example.domain.usecase.UnlockGameUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
-
 @HiltViewModel
-class HockeyViewModel @Inject constructor(private val useCase: HockeyUseCase):ViewModel() {
+class HockeyViewModel @Inject constructor(private val useCase: UnlockGameUseCase): ViewModel() {
 
+    private val _liveGames = MutableStateFlow<List<GameAvailable>>(emptyList())
+    val liveGames: StateFlow<List<GameAvailable>> = _liveGames
 
-        private val _hockey = MutableStateFlow(StateModel(null, null))
-        val hockey : StateFlow<StateModel> = _hockey
+    private val _pastGames = MutableStateFlow<List<GameAvailable>>(emptyList())
+    val pastGames: StateFlow<List<GameAvailable>> = _pastGames
 
-        fun loadHockeyGame() {
+    private val _gameDetails = MutableStateFlow<HockeyGame?>(null)
+    val gameDetails: StateFlow<HockeyGame?> = _gameDetails
 
-                val (team, player) = useCase.loadHockeyGame()
-                _hockey.value = StateModel(team, player)
+    fun loadLiveGames() {
+        val games = useCase.hockeyRepository
+        _liveGames.value = games.getLiveGames()
+    }
 
+    fun loadPastGames() {
+        val games = useCase.hockeyRepository
+        _pastGames.value = games.getPastGames()
+    }
 
-
-        }
-
+    fun loadGameDetails(id: String) {
+        val game = useCase.hockeyRepository.getLiveGame(id)
+        _gameDetails.value = game.value
+    }
 }
