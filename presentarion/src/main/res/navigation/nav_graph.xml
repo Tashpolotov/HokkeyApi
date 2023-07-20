@@ -30,4 +30,9 @@
             android:id="@+id/action_homeFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/coinFragment"
+        android:name="com.example.presentarion.fragment.CoinFragment"
+        android:label="fragment_coin"
+        tools:layout="@layout/fragment_coin" />
 </navigation>
