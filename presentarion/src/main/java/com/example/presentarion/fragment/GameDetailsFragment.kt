@@ -1,6 +1,7 @@
 package com.example.presentarion.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,22 +29,26 @@ class GameDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvGameId.text = gameId
 
         gameId = arguments?.getString("gameId")
 
-        gameId?.let {
-            viewModel.loadGameDetails(it)
-        }
-
         lifecycleScope.launchWhenStarted {
-            viewModel.gameDetails.collect { game ->
+            viewModel.gameDetails.collect { games ->
+                val game = games.firstOrNull { it?.id == gameId }
                 game?.let {
+                    Log.e("GameDetailsFragment", "Received game: $game")
 
-                    binding.tvScoreFirstTeam.text = game.scoreFirstTeam.toString()
-                    binding.tvScoreSecondTeam.text = game.scoreSecondTeam.toString() }
+                    binding.tvScroll.text = it.scoreFirstTeam.toString()
+                    binding.tvSecondTeamScroll.text = it.scoreSecondTeam.toString()
+                    binding.tvTeamName.text = it.firstTeam.name
+                    binding.tvTeamSecondName.text = it.secondTeam.name
+                }
             }
         }
-    }
 
+        gameId?.let {
+            Log.e("GameDetailsFragment", "Loading game details for gameId: $it")
+            viewModel.loadGameDetails(it)
+        }
+    }
 }

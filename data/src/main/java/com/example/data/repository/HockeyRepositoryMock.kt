@@ -7,7 +7,7 @@ import com.example.domain.model.HockeyTeam
 import com.example.domain.repository.HockeyRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
+
 
 
 class HockeyRepositoryMock : HockeyRepository {
@@ -18,17 +18,17 @@ class HockeyRepositoryMock : HockeyRepository {
         val liveGamesList = mutableListOf<GameAvailable>()
         val game1 = HockeyGame(
             "game1", 1, 3,
-            HockeyTeam("game4", "Liverpool", ""),
-            HockeyTeam("game7", "Chelsea", ""),
+            HockeyTeam("game1", "Liverpool", ""),
+            HockeyTeam("game1", "Chelsea", ""),
             GameState.LiveGame(0, 0)
         )
         val openGame1 = GameAvailable.OpenGame(game1)
         liveGamesList.add(openGame1)
 
         val game2 = HockeyGame(
-            "game2", 1, 3,
-            HockeyTeam("game1", "Aiba", ""),
-            HockeyTeam("game1", "Beka", ""),
+            "game2", 1, 8,
+            HockeyTeam("game2", "Aiba", ""),
+            HockeyTeam("game2", "Beka", ""),
             GameState.LiveGame(1, 1)
         )
         val openGame2 = GameAvailable.OpenGame(game2)
@@ -78,9 +78,30 @@ class HockeyRepositoryMock : HockeyRepository {
         return pastGameList
     }
 
-    override fun getLiveGame(id: String): MutableStateFlow<HockeyGame?> {
-        return liveGames
+    override fun getLiveGame(id: String): List<HockeyGame> {
+        val gamesList = mutableListOf<HockeyGame>()
 
+        // Здесь вам нужно получить список игр в соответствии с переданным идентификатором
+
+        // Пример добавления игр в список
+        val game1 = HockeyGame(
+            "game1", 1, 3,
+            HockeyTeam("game1", "Liverpool", ""),
+            HockeyTeam("game1", "Chelsea", ""),
+            GameState.LiveGame(8, 16)
+        )
+        gamesList.add(game1)
+
+        val game2 = HockeyGame(
+            id, 1, 8,
+            HockeyTeam("game2", "Aiba", ""),
+            HockeyTeam("game2", "Beka", ""),
+            GameState.LiveGame(1, 1)
+        )
+        gamesList.add(game2)
+
+        // Возвращаем список игр
+        return gamesList
     }
 
     override fun unlockGame(id: String) {

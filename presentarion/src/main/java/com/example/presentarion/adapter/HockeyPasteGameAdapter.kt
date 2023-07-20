@@ -35,8 +35,6 @@ class HockeyPasteGameAdapter(var onClick: (id: String) -> Unit )
                 is GameAvailable.OpenGame -> {
                     // Обработка для открытой игры
                     val game = model.game
-                    binding.tvTime.text = game.stateGame.toString()
-                    binding.tvPart.text = game.stateGame.toString()
                     binding.tvScoreTeamFirst.text = game.scoreFirstTeam.toString()
                     binding.tvScoreTeamSecond.text = game.scoreSecondTeam.toString()
                 }

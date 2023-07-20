@@ -2,7 +2,7 @@ package com.example.domain.repository
 
 import com.example.domain.model.GameAvailable
 import com.example.domain.model.HockeyGame
-import kotlinx.coroutines.flow.StateFlow
+
 
 
 interface HockeyRepository {
@@ -11,7 +11,7 @@ interface HockeyRepository {
 
     fun getPastGames() : List<GameAvailable>
 
-    fun getLiveGame(id: String) : StateFlow<HockeyGame?>
+    fun getLiveGame(id: String) : List<HockeyGame?>
 
     fun unlockGame(id: String)
 
