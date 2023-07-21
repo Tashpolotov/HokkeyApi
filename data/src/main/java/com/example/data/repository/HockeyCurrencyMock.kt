@@ -5,7 +5,7 @@ import com.example.domain.repository.CurrencyRepository
 
     class HockeyCurrencyMock: CurrencyRepository  {
 
-        var currency = 100
+        var currency = 0
 
         override fun balance(): Currency {
             return Currency(currency)

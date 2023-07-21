@@ -9,7 +9,11 @@ class UnlockGameUseCase(val hockeyRepository: HockeyRepository, val currencyRepo
         hockeyRepository.getPastGames()
         hockeyRepository.getLiveGame(id)
         hockeyRepository.unlockGame(id)
-        currencyRepository.balanceMinus(10)
+        currencyRepository.balanceMinus(5)
+        currencyRepository.balancePlus()
+        currencyRepository.balance()
+        hockeyRepository.getTutorial()
+
 
     }
 

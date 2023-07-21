@@ -35,4 +35,13 @@
         android:name="com.example.presentarion.fragment.CoinFragment"
         android:label="fragment_coin"
         tools:layout="@layout/fragment_coin" />
+    <fragment
+        android:id="@+id/hockeyTutorialFragment"
+        android:name="com.example.presentarion.fragment.HockeyTutorialFragment"
+        android:label="fragment_hockey_tutorial"
+        tools:layout="@layout/fragment_hockey_tutorial" >
+        <action
+            android:id="@+id/action_hockeyTutorialFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>

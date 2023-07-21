@@ -9,6 +9,7 @@ import com.example.presentarion.R
 import com.example.presentarion.databinding.ActivityMainBinding
 import com.example.presentarion.fragment.CoinFragment
 import com.example.presentarion.fragment.GameDetailsFragment
+import com.example.presentarion.fragment.HockeyTutorialFragment
 import com.example.presentarion.fragment.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,27 +24,32 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(R.id.fr_container, HomeFragment())
             .commit()
 
-        binding.bottomNavView.setOnNavigationItemReselectedListener {
-            when (it.itemId) {
+        binding.bottomNavView.setOnItemSelectedListener { item ->
+            when (item.itemId) {
                 R.id.menu_item_home -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fr_container, HomeFragment())
                         .addToBackStack(null)
                         .commit()
+                    true
                 }
                 R.id.menu_item_anim -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.fr_container, CoinFragment())
                         .addToBackStack(null)
                         .commit()
+                    true
                 }
-                R.id.menu_item_info ->{
+                R.id.menu_item_info -> {
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.fr_container, GameDetailsFragment())
+                        .replace(R.id.fr_container, HockeyTutorialFragment())
                         .addToBackStack(null)
                         .commit()
+                    true
                 }
+                else -> false
             }
         }
+
     }
 }

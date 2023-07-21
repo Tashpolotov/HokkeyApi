@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/const_player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_rv"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+
+        <TextView
+            android:id="@+id/tv_allteam_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:text="Team : "
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/tv_team_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/tv_allteam_name"
+            app:layout_constraintTop_toTopOf="@id/tv_allteam_name"
+            android:layout_marginStart="8dp"
+            android:text="Oklahoma"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/tv_teamAll_player"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_allteam_name"
+            app:layout_constraintStart_toStartOf="@id/tv_allteam_name"
+            android:textSize="20sp"
+            android:layout_marginTop="8dp"
+            android:text="Player :"
+            android:textColor="@color/white"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_team_player"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/tv_teamAll_player"
+            app:layout_constraintTop_toTopOf="@id/tv_teamAll_player"
+            android:text="6 player"
+            android:textSize="20sp"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/tv_all_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_teamAll_player"
+            app:layout_constraintStart_toStartOf="@id/tv_teamAll_player"
+            android:textColor="@color/white"
+            android:text="Position :"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_player_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/tv_all_position"
+            app:layout_constraintTop_toTopOf="@id/tv_all_position"
+            android:text="Вратарь"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_all_tutorial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_all_position"
+            app:layout_constraintStart_toStartOf="@id/tv_all_position"
+            android:textColor="@color/white"
+            android:text="Position :"
+            android:textSize="20sp"
+            android:layout_marginTop="10dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_player_tutorial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/tv_all_tutorial"
+            app:layout_constraintTop_toTopOf="@id/tv_all_tutorial"
+            android:layout_marginStart="8dp"
+            android:text="он защишает"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:background="@color/red"
+            app:layout_constraintTop_toBottomOf="@id/tv_player_tutorial"
+            app:layout_constraintStart_toStartOf="@id/tv_player_tutorial"
+            android:layout_marginTop="8dp"/>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

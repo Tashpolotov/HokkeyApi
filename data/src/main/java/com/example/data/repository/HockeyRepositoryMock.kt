@@ -1,9 +1,6 @@
 package com.example.data.repository
 
-import com.example.domain.model.GameAvailable
-import com.example.domain.model.GameState
-import com.example.domain.model.HockeyGame
-import com.example.domain.model.HockeyTeam
+import com.example.domain.model.*
 import com.example.domain.repository.HockeyRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,7 +9,6 @@ import kotlinx.coroutines.flow.StateFlow
 
 class HockeyRepositoryMock : HockeyRepository {
 
-    private val liveGames = MutableStateFlow<HockeyGame?>(null)
 
     override fun getLiveGames(): List<GameAvailable> {
         val liveGamesList = mutableListOf<GameAvailable>()
@@ -106,5 +102,18 @@ class HockeyRepositoryMock : HockeyRepository {
 
     override fun unlockGame(id: String) {
 
+    }
+
+    override fun getTutorial(): List<HockeyTutorial> {
+        return listOf(
+            HockeyTutorial(
+                "Nevada", 6, "вратарь", "Защищает ворота команды"),
+            HockeyTutorial(
+                "Nevada", 6, "Защитник", "Защищает вратаря и свои ворота от шайбы участвует в атаке"
+            ),
+            HockeyTutorial(
+                "Nevada", 6, "Нападающий", "Участвует в атаке и забивает голы"
+            )
+            )
     }
 }
