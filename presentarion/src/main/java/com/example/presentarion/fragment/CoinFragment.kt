@@ -38,7 +38,6 @@ class CoinFragment : Fragment() {
         val shakeListener: ShakeDetector.ShakeListener = object : ShakeDetector.ShakeListener {
             override fun onShakeDetected() {
                 viewModel.increaseBalance()
-                viewModel.loadBalance()
                 animateCoin()
             }
 
@@ -57,16 +56,8 @@ class CoinFragment : Fragment() {
                 }
             }
         }
-        viewModel.increaseBalance()
-        lifecycleScope.launchWhenCreated {
-            viewModel.balanceNew.collect{
-                it?.let {
-                    binding.tvBalacne.text = it.balance.toString()
-                }
-            }
-        }
-        viewModel.loadBalance()
-        animateCoin()
+
+
     }
 
     override fun onDestroyView() {

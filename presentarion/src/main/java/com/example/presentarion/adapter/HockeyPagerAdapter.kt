@@ -18,7 +18,7 @@ class HockeyPagerAdapter : ListAdapter<HockeyTutorial, HockeyPagerAdapter.VPHold
             binding.tvTutorialHockey1.text = model.teamName
             binding.tvTutorialHockey3.text = model.playerTeam.toString()
             binding.tvTutorialHockey2.text = model.position
-            Log.e("HockeyPagerAdapter", "Binding item at position $adapterPosition: $model")
+
         }
 
     }

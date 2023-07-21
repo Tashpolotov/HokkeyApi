@@ -5,16 +5,16 @@ import com.example.domain.model.HockeyGame
 import com.example.domain.model.HockeyTutorial
 
 
-interface HockeyRepository {
+    interface HockeyRepository {
 
-    fun getLiveGames() : List<GameAvailable>
+        fun getLiveGames() : List<GameAvailable>
 
-    fun getPastGames() : List<GameAvailable>
+        fun getPastGames() : List<GameAvailable>
 
-    fun getLiveGame(id: String) : List<HockeyGame?>
+        fun getLiveGame(id: String) : List<HockeyGame?>
 
-    fun unlockGame(id: String)
+        fun unlockGame(id: String)
 
-    fun getTutorial() : List<HockeyTutorial>
+        fun getTutorial() : List<HockeyTutorial>
 
-}
+    }

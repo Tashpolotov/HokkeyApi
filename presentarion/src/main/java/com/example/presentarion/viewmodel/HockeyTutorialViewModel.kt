@@ -19,6 +19,7 @@ class HockeyTutorialViewModel @Inject constructor(val useCase: UnlockGameUseCase
     fun loadTutorialHockey() {
         val result = useCase.hockeyRepository
         _tutorial.value = result.getTutorial()
+
     }
 
 }

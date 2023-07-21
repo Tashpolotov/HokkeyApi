@@ -2,9 +2,6 @@ package com.example.data.repository
 
 import com.example.domain.model.*
 import com.example.domain.repository.HockeyRepository
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-
 
 
 class HockeyRepositoryMock : HockeyRepository {
@@ -16,7 +13,7 @@ class HockeyRepositoryMock : HockeyRepository {
             "game1", 1, 3,
             HockeyTeam("game1", "Liverpool", ""),
             HockeyTeam("game1", "Chelsea", ""),
-            GameState.LiveGame(0, 0)
+            GameState.LiveGame(8, 1)
         )
         val openGame1 = GameAvailable.OpenGame(game1)
         liveGamesList.add(openGame1)
@@ -32,16 +29,16 @@ class HockeyRepositoryMock : HockeyRepository {
 
 
         val hiddenGame1 = GameAvailable.HiddenGame(
-            HockeyTeam("Team E", "Nurba", ""),
-            HockeyTeam("Team F", "Bek", ""),
+            HockeyTeam("game3", "Nurba", ""),
+            HockeyTeam("game3", "Bek", ""),
             "game3"
         )
         liveGamesList.add(hiddenGame1)
 
         val hiddenGame2 = GameAvailable.HiddenGame(
 
-            HockeyTeam("Team G", "Manas", ""),
-            HockeyTeam("Team H", "Mika", ""),
+            HockeyTeam("game4", "Manas", ""),
+            HockeyTeam("game4", "Mika", ""),
             "game4",
         )
         liveGamesList.add(hiddenGame2)
@@ -54,8 +51,8 @@ class HockeyRepositoryMock : HockeyRepository {
         val pastGame1 = GameAvailable.OpenGame(
             HockeyGame(
                 "game5", 5, 8,
-                HockeyTeam("Team I", "men", ""),
-                HockeyTeam("Team J", "sen", ""),
+                HockeyTeam("game6", "men", ""),
+                HockeyTeam("game6", "sen", ""),
                 GameState.PastGame()
             )
         )
@@ -64,8 +61,8 @@ class HockeyRepositoryMock : HockeyRepository {
         val pastGame2 = GameAvailable.OpenGame(
             HockeyGame(
                 "game6", 7, 0,
-                HockeyTeam("Team K", "alma", ""),
-                HockeyTeam("Team L", "pi9z", ""),
+                HockeyTeam("game7", "alma", ""),
+                HockeyTeam("game7", "pi9z", ""),
                 GameState.PastGame()
             )
         )
@@ -77,31 +74,40 @@ class HockeyRepositoryMock : HockeyRepository {
     override fun getLiveGame(id: String): List<HockeyGame> {
         val gamesList = mutableListOf<HockeyGame>()
 
-        // Здесь вам нужно получить список игр в соответствии с переданным идентификатором
-
-        // Пример добавления игр в список
         val game1 = HockeyGame(
             "game1", 1, 3,
             HockeyTeam("game1", "Liverpool", ""),
             HockeyTeam("game1", "Chelsea", ""),
-            GameState.LiveGame(8, 16)
+            GameState.LiveGame(8, 1)
         )
         gamesList.add(game1)
 
         val game2 = HockeyGame(
-            id, 1, 8,
+            "game2", 1, 8,
             HockeyTeam("game2", "Aiba", ""),
             HockeyTeam("game2", "Beka", ""),
             GameState.LiveGame(1, 1)
         )
         gamesList.add(game2)
 
-        // Возвращаем список игр
+        val game3 = HockeyGame(
+            "game3", 1, 3,
+            HockeyTeam("game3", "Nurba", ""),
+            HockeyTeam("game3", "Bek", ""),
+            GameState.LiveGame(8, 1)
+        )
+        gamesList.add(game3)
+
+        val game4 = HockeyGame(
+            "game4", 1, 3,
+            HockeyTeam("game4", "Manas", ""),
+            HockeyTeam("game4", "Mika", ""),
+            GameState.LiveGame(8, 1)
+        )
+        gamesList.add(game4)
+
+
         return gamesList
-    }
-
-    override fun unlockGame(id: String) {
-
     }
 
     override fun getTutorial(): List<HockeyTutorial> {
@@ -114,6 +120,10 @@ class HockeyRepositoryMock : HockeyRepository {
             HockeyTutorial(
                 "Nevada", 6, "Нападающий", "Участвует в атаке и забивает голы"
             )
-            )
+        )
+    }
+
+    override fun unlockGame(id: String) {
+
     }
 }
