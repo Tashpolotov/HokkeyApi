@@ -61,7 +61,7 @@ class HockeyAdapter(
                 val hiddenGameId = model.id
                 if(viewModel.balanceNew.value != null) {
                     GlobalScope.launch {
-                        viewModel.coin.collect{
+                        viewModel.balance.collect{
                             it?.balance
                         }
                     }

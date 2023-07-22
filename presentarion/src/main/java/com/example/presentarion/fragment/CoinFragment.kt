@@ -39,6 +39,8 @@ class CoinFragment : Fragment() {
             override fun onShakeDetected() {
                 viewModel.increaseBalance()
                 animateCoin()
+                viewModel.loadBalance()
+                viewModel.updateBalance()
             }
 
             override fun onShakeStopped() {

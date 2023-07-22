@@ -27,20 +27,21 @@ class HockeyViewModel @Inject constructor(val useCase: UnlockGameUseCase): ViewM
     private val _gameDetails = MutableStateFlow<List<HockeyGame?>>(emptyList())
     val gameDetails: StateFlow<List<HockeyGame?>> = _gameDetails
 
-    private val _balance = MutableStateFlow(Currency(0))
-    val balance: StateFlow<Currency> = _balance
+    private val _balance = MutableStateFlow<Currency?>(null)
+    val balance: StateFlow<Currency?> = _balance
 
     private val _balanceNew = MutableStateFlow<Currency?>(null)
     val balanceNew: StateFlow<Currency?> = _balanceNew
 
-    private val _coin = MutableStateFlow(Currency(0))
-    val coin: StateFlow<Currency> = _coin
 
+    init {
+        _balance.value = useCase.currencyRepository.balance()
+    }
 
         fun unlockGame() {
-            Log.e("HockeyViewModel", "Unlocking game - starting balance: ${_coin.value?.balance}")
+
             useCase.currencyRepository.balanceMinus(50)
-            Log.e("HockeyViewModel", "Unlocking game - updated balance: ${_coin.value?.balance}")
+
         }
 
         fun increaseBalance() {
@@ -53,7 +54,7 @@ class HockeyViewModel @Inject constructor(val useCase: UnlockGameUseCase): ViewM
                 "HockeyViewModel",
                 "Increasing balance - updated balance: ${_balance.value?.balance}"
             )
-            updateBalance()
+            loadBalance()
         }
 
         fun loadBalance() {
