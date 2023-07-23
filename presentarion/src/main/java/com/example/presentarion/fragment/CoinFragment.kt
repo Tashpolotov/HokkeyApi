@@ -1,5 +1,6 @@
 package com.example.presentarion.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +31,7 @@ class CoinFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         coinImageView = binding.imgCoin
@@ -39,7 +41,6 @@ class CoinFragment : Fragment() {
             override fun onShakeDetected() {
                 viewModel.increaseBalance()
                 animateCoin()
-                viewModel.loadBalance()
 
             }
 
@@ -52,9 +53,9 @@ class CoinFragment : Fragment() {
 
 
         lifecycleScope.launchWhenCreated {
-            viewModel.balance.collect { balance ->
-                balance?.let {
-                    binding.tvBalacne.text = it.balance.toString()
+            viewModel.state.collect { state ->
+                state?.let {
+                    binding.tvBalacne.text = "Balance: ${state.balance?.balance ?: 0}"
                 }
             }
         }

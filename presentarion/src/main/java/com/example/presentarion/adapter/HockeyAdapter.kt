@@ -57,17 +57,15 @@ class HockeyAdapter(
 
             itemView.setOnClickListener {
                 val hiddenGameId = model.id
-                if ((viewModel.balance.value?.balance ?: 0) >= 50) {
+                if ((viewModel.state.value?.balance?.balance ?: 0) >= 50) {
                     viewModel.unlockGame()
                     onClick(hiddenGameId)
-
                 } else {
                     Toast.makeText(itemView.context, "Недостаточно монет", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             VIEW_TYPE_OPEN_GAME -> {

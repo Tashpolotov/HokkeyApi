@@ -14,6 +14,8 @@ import com.example.domain.model.HockeyTutorial
 
         fun getLiveGame(id: String) : List<HockeyGame?>
 
+        fun getPastGame(id: String) : List<HockeyGame?>
+
         fun unlockGame(id: String)
 
         fun getTutorial() : List<HockeyTutorial>

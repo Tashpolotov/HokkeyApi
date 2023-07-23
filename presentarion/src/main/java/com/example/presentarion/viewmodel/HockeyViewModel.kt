@@ -1,69 +1,58 @@
 package com.example.presentarion.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.domain.model.Currency
-import com.example.domain.model.GameAvailable
-import com.example.domain.model.HockeyGame
-import com.example.domain.model.HockeyTeam
-import com.example.domain.repository.HockeyRepository
 import com.example.domain.usecase.UnlockGameUseCase
+import com.example.presentarion.model.HockeyViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
-import javax.inject.Inject
+import kotlinx.coroutines.flow.asStateFlow
 
+import javax.inject.Inject
 @HiltViewModel
 class HockeyViewModel @Inject constructor(val useCase: UnlockGameUseCase): ViewModel() {
 
-    private val _liveGames = MutableStateFlow<List<GameAvailable>>(emptyList())
-    val liveGames: StateFlow<List<GameAvailable>> = _liveGames
-
-    private val _pastGames = MutableStateFlow<List<GameAvailable>>(emptyList())
-    val pastGames: StateFlow<List<GameAvailable>> = _pastGames
-
-    private val _gameDetails = MutableStateFlow<List<HockeyGame?>>(emptyList())
-    val gameDetails: StateFlow<List<HockeyGame?>> = _gameDetails
-
-    private val _balance = MutableStateFlow<Currency?>(null)
-    val balance: StateFlow<Currency?> = _balance
-
+    private val _state = MutableStateFlow(HockeyViewState())
+    val state: StateFlow<HockeyViewState> = _state.asStateFlow()
 
     init {
-        _balance.value = useCase.currencyRepository.balance()
+        loadBalance()
     }
 
-        fun unlockGame() {
+    fun unlockGame() {
+        useCase.currencyRepository.balanceMinus(50)
+        loadBalance()
+    }
 
-            useCase.currencyRepository.balanceMinus(50)
+    fun increaseBalance() {
+        useCase.currencyRepository.balancePlus()
+        loadBalance()
+    }
 
-        }
+    private fun loadBalance() {
+        val balanceNew = useCase.currencyRepository.balance()
+        _state.value = _state.value.copy(balance = balanceNew)
+    }
 
-        fun increaseBalance() {
-            useCase.currencyRepository.balancePlus()
-        }
+    fun loadLiveGames() {
+        val games = useCase.hockeyRepository
+        _state.value = _state.value.copy(liveGames = games.getLiveGames())
+    }
 
-        fun loadBalance() {
-            val balanceNew = useCase.currencyRepository.balance()
-            _balance.value = balanceNew
+    fun loadPastGames() {
+        val games = useCase.hockeyRepository
+        _state.value = _state.value.copy(pastGames = games.getPastGames())
+    }
 
-        }
+    fun loadGameDetails(id: String) {
+        val game = useCase.hockeyRepository
+        _state.value = _state.value.copy(gameDetails = game.getLiveGame(id))
 
-        fun loadLiveGames() {
 
-            val games = useCase.hockeyRepository
-            _liveGames.value = games.getLiveGames()
-        }
+    }
 
-        fun loadPastGames() {
-            val games = useCase.hockeyRepository
-            _pastGames.value = games.getPastGames()
-        }
-
-        fun loadGameDetails(id: String) {
-            val game = useCase.hockeyRepository
-            _gameDetails.value = game.getLiveGame(id)
-        }
+    fun loadGamePast(id: String) {
+        val gamePast = useCase.hockeyRepository
+        _state.value = _state.value.copy(loadGamePast = gamePast.getPastGame(id))
+    }
 }

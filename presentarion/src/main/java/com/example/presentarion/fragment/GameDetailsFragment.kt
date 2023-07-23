@@ -33,8 +33,8 @@ class GameDetailsFragment : Fragment() {
         gameId = arguments?.getString("gameId")
 
         lifecycleScope.launchWhenStarted {
-            viewModel.gameDetails.collect { games ->
-                val game = games.firstOrNull { it?.id == gameId }
+            viewModel.state.collect { games ->
+                val game = games.gameDetails.firstOrNull { it?.id == gameId }
                 game?.let {
                     Log.e("GameDetailsFragment", "Received game: $game")
 
@@ -47,8 +47,24 @@ class GameDetailsFragment : Fragment() {
         }
 
         gameId?.let {
-            Log.e("GameDetailsFragment", "Loading game details for gameId: $it")
             viewModel.loadGameDetails(it)
+        }
+        lifecycleScope.launchWhenStarted {
+            viewModel.state.collect {
+                val game = it.loadGamePast.firstOrNull { it?.id == gameId }
+                game?.let {
+
+
+                    binding.tvScroll.text = it.scoreFirstTeam.toString()
+                    binding.tvSecondTeamScroll.text = it.scoreSecondTeam.toString()
+                    binding.tvTeamName.text = it.firstTeam.name
+                    binding.tvTeamSecondName.text = it.secondTeam.name
+                }
+            }
+        }
+
+        gameId?.let {
+            viewModel.loadGamePast(it)
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.presentarion.fragment
 
+import android.icu.util.BuddhistCalendar
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -50,14 +51,14 @@ class HomeFragment : Fragment() {
     private fun init() {
 
         lifecycleScope.launchWhenCreated {
-            viewModel.liveGames.collect {
-                adapter.submitList(it)
+            viewModel.state.collect {
+                adapter.submitList(it.liveGames)
             }
         }
 
         lifecycleScope.launchWhenCreated {
-            viewModel.pastGames.collect {
-                adapterPasteGame.submitList(it)
+            viewModel.state.collect {
+                adapterPasteGame.submitList(it.pastGames)
             }
         }
 
@@ -65,7 +66,6 @@ class HomeFragment : Fragment() {
         viewModel.loadPastGames()
 
     }
-
     private fun onClickItem(id: String) {
         val bundle = Bundle().apply {
             putString("gameId", id)

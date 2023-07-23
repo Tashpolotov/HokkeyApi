@@ -46,8 +46,8 @@ class HockeyRepositoryMock : HockeyRepository {
         val pastGame1 = GameAvailable.OpenGame(
             HockeyGame(
                 "game5", 5, 8,
-                HockeyTeam("game6", "men", ""),
-                HockeyTeam("game6", "sen", ""),
+                HockeyTeam("game5", "real", ""),
+                HockeyTeam("game5", "barsa", ""),
                 GameState.PastGame()
             )
         )
@@ -55,9 +55,9 @@ class HockeyRepositoryMock : HockeyRepository {
 
         val pastGame2 = GameAvailable.OpenGame(
             HockeyGame(
-                "game6", 7, 0,
-                HockeyTeam("game7", "alma", ""),
-                HockeyTeam("game7", "pi9z", ""),
+                "game6", 7, 1,
+                HockeyTeam("game6", "roma", ""),
+                HockeyTeam("game6", "inter", ""),
                 GameState.PastGame()
             )
         )
@@ -107,6 +107,28 @@ class HockeyRepositoryMock : HockeyRepository {
         )
         gamesList.add(game4)
 
+
+        return gamesList
+    }
+
+    override fun getPastGame(id: String): List<HockeyGame?> {
+        val gamesList = mutableListOf<HockeyGame>()
+
+        val game1 = HockeyGame(
+            "game5", 5, 8,
+            HockeyTeam("game5", "real", ""),
+            HockeyTeam("game5", "barsa", ""),
+            GameState.PastGame()
+        )
+        gamesList.add(game1)
+
+        val game2 = HockeyGame(
+            "game6", 7, 1,
+            HockeyTeam("game6", "roma", ""),
+            HockeyTeam("game6", "inter", ""),
+            GameState.PastGame()
+        )
+        gamesList.add(game2)
 
         return gamesList
     }
