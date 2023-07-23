@@ -24,40 +24,46 @@
             android:paddingTop="16dp"/>
 
         <TextView
+            android:id="@+id/tv_team_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Правила хоккея"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_payer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Правила хоккея"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="16dp"
+
+            />
+        <TextView
+            android:id="@+id/tv_position_payer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Правила хоккея"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:paddingTop="16dp"/>
+        <TextView
             android:id="@+id/tv_tutorial_hockey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Правила хоккея"
             android:textSize="26sp"
             android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:paddingTop="16dp"/>
-
-        <TextView
-            android:id="@+id/tv_tutorial_hockey1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Правила хоккея"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:paddingTop="16dp"/>
-        <TextView
-            android:id="@+id/tv_tutorial_hockey2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Правила хоккея"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:layout_gravity="center_horizontal"
-            android:paddingTop="16dp"/>
-        <TextView
-            android:id="@+id/tv_tutorial_hockey3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Правила хоккея"
-            android:textSize="26sp"
-            android:textStyle="bold"
+            android:gravity="center"
             android:layout_gravity="center_horizontal"
             android:paddingTop="16dp"/>
 

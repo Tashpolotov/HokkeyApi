@@ -1,7 +1,6 @@
 package com.example.presentarion.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,16 +24,13 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        Log.e("HomeFragment", "onCreateView")
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.e("HomeFragment", "onViewCreated")
         adapter = HockeyAdapter(viewModel, this::onClickItem)
         init()
         initView()
@@ -42,18 +38,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        Log.e("HomeFragment", "initAdapter")
+
         binding.rvHomeLive.adapter = adapter
         binding.rvHomeLast.adapter = adapterPasteGame
     }
 
     private fun initView() {
-        Log.e("HomeFragment", "initView")
         adapterPasteGame.onClick = this::onClickItem
     }
 
     private fun init() {
-        Log.e("HomeFragment", "init")
+
         lifecycleScope.launchWhenCreated {
             viewModel.liveGames.collect {
                 adapter.submitList(it)
@@ -68,21 +63,19 @@ class HomeFragment : Fragment() {
 
         viewModel.loadLiveGames()
         viewModel.loadPastGames()
+
     }
 
     private fun onClickItem(id: String) {
-        Log.e("HomeFragment", "onClickItem")
         val bundle = Bundle().apply {
             putString("gameId", id)
         }
         val gameDetailsFragment = GameDetailsFragment()
         gameDetailsFragment.arguments = bundle
 
-        // Важное замечание: здесь я заменил fragmentManager на childFragmentManager
-        // чтобы правильно обрабатывать фрагменты, вложенные в другие фрагменты
-        childFragmentManager.beginTransaction()
-            .replace(R.id.fr_container, gameDetailsFragment)
-            .addToBackStack(null)
-            .commit()
+        fragmentManager?.beginTransaction()
+            ?.replace(R.id.fr_container, gameDetailsFragment)
+            ?.addToBackStack(null)
+            ?.commit()
     }
 }

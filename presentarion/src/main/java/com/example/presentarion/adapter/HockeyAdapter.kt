@@ -20,7 +20,6 @@ class HockeyAdapter(
     private val onClick: (id: String) -> Unit)
     : ListAdapter<GameAvailable, RecyclerView.ViewHolder>(HockeyDiffutil()) {
 
-    private var coins: Int = 0
 
     companion object {
         private const val VIEW_TYPE_OPEN_GAME = 1
@@ -57,21 +56,14 @@ class HockeyAdapter(
             binding.tvTime.text = ""
 
             itemView.setOnClickListener {
-
                 val hiddenGameId = model.id
-                if(viewModel.balanceNew.value != null) {
-                    GlobalScope.launch {
-                        viewModel.balance.collect{
-                            it?.balance
-                        }
-                    }
+                if ((viewModel.balance.value?.balance ?: 0) >= 50) {
                     viewModel.unlockGame()
                     onClick(hiddenGameId)
+
                 } else {
                     Toast.makeText(itemView.context, "Недостаточно монет", Toast.LENGTH_SHORT).show()
                 }
-
-
             }
         }
     }

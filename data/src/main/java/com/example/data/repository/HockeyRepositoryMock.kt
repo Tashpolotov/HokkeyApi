@@ -3,12 +3,12 @@ package com.example.data.repository
 import com.example.domain.model.*
 import com.example.domain.repository.HockeyRepository
 
-
 class HockeyRepositoryMock : HockeyRepository {
+    private val liveGamesList = mutableListOf<GameAvailable>()
+    private val pastGameList = mutableListOf<GameAvailable>()
 
 
-    override fun getLiveGames(): List<GameAvailable> {
-        val liveGamesList = mutableListOf<GameAvailable>()
+    init {
         val game1 = HockeyGame(
             "game1", 1, 3,
             HockeyTeam("game1", "Liverpool", ""),
@@ -27,27 +27,22 @@ class HockeyRepositoryMock : HockeyRepository {
         val openGame2 = GameAvailable.OpenGame(game2)
         liveGamesList.add(openGame2)
 
-
         val hiddenGame1 = GameAvailable.HiddenGame(
-            HockeyTeam("game3", "Nurba", ""),
-            HockeyTeam("game3", "Bek", ""),
+            HockeyTeam("", "", ""),
+            HockeyTeam("", "", ""),
             "game3"
         )
         liveGamesList.add(hiddenGame1)
 
         val hiddenGame2 = GameAvailable.HiddenGame(
 
-            HockeyTeam("game4", "Manas", ""),
-            HockeyTeam("game4", "Mika", ""),
+            HockeyTeam("", "", ""),
+            HockeyTeam("", "", ""),
             "game4",
         )
         liveGamesList.add(hiddenGame2)
 
-        return liveGamesList
-    }
 
-    override fun getPastGames(): List<GameAvailable> {
-        val pastGameList = mutableListOf<GameAvailable>()
         val pastGame1 = GameAvailable.OpenGame(
             HockeyGame(
                 "game5", 5, 8,
@@ -68,6 +63,12 @@ class HockeyRepositoryMock : HockeyRepository {
         )
         pastGameList.add(pastGame2)
 
+    }
+    override fun getLiveGames(): List<GameAvailable> {
+        return liveGamesList
+    }
+
+    override fun getPastGames(): List<GameAvailable> {
         return pastGameList
     }
 
@@ -124,6 +125,10 @@ class HockeyRepositoryMock : HockeyRepository {
     }
 
     override fun unlockGame(id: String) {
+        val index = liveGamesList.indexOfFirst { it is GameAvailable.HiddenGame && it.id == id }
+
+            val unlockedGame = liveGamesList.removeAt(index)
+            liveGamesList.add(index, unlockedGame)
 
     }
 }

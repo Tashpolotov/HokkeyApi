@@ -9,16 +9,20 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+
 @Module
 @InstallIn(SingletonComponent::class)
 class TestModule {
 
     @Provides
+    @Singleton
     fun provideHockeyRepository(): HockeyRepository {
         return HockeyRepositoryMock()
     }
 
     @Provides
+    @Singleton
     fun provideCurrencyRepository(): CurrencyRepository {
         return HockeyCurrencyMock()
     }

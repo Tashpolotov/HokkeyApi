@@ -14,10 +14,10 @@ import com.example.presentarion.databinding.ItemVp2InfoBinding
 class HockeyPagerAdapter : ListAdapter<HockeyTutorial, HockeyPagerAdapter.VPHolder>(VPDiffutil()) {
     inner class VPHolder(private val binding: ItemVp2InfoBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(model: HockeyTutorial) {
-            binding.tvTutorialHockey.text = model.function
-            binding.tvTutorialHockey1.text = model.teamName
-            binding.tvTutorialHockey3.text = model.playerTeam.toString()
-            binding.tvTutorialHockey2.text = model.position
+            binding.tvTeamName.text = "команда: ${model.teamName}"
+            binding.tvPayerName.text = "В команде: ${model.playerTeam}"
+            binding.tvPositionPayer.text = "Позиция: ${model.position}"
+            binding.tvTutorialHockey.text = "Обязанности: ${model.function}"
 
         }
 

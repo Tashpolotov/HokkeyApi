@@ -7,6 +7,7 @@ import com.example.domain.model.HockeyTutorial
 
     interface HockeyRepository {
 
+
         fun getLiveGames() : List<GameAvailable>
 
         fun getPastGames() : List<GameAvailable>

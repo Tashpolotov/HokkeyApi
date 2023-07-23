@@ -30,9 +30,6 @@ class HockeyViewModel @Inject constructor(val useCase: UnlockGameUseCase): ViewM
     private val _balance = MutableStateFlow<Currency?>(null)
     val balance: StateFlow<Currency?> = _balance
 
-    private val _balanceNew = MutableStateFlow<Currency?>(null)
-    val balanceNew: StateFlow<Currency?> = _balanceNew
-
 
     init {
         _balance.value = useCase.currencyRepository.balance()
@@ -45,16 +42,7 @@ class HockeyViewModel @Inject constructor(val useCase: UnlockGameUseCase): ViewM
         }
 
         fun increaseBalance() {
-            Log.e(
-                "HockeyViewModel",
-                "Increasing balance - starting balance: ${_balance.value?.balance}"
-            )
             useCase.currencyRepository.balancePlus()
-            Log.e(
-                "HockeyViewModel",
-                "Increasing balance - updated balance: ${_balance.value?.balance}"
-            )
-            loadBalance()
         }
 
         fun loadBalance() {
@@ -78,11 +66,4 @@ class HockeyViewModel @Inject constructor(val useCase: UnlockGameUseCase): ViewM
             val game = useCase.hockeyRepository
             _gameDetails.value = game.getLiveGame(id)
         }
-    fun updateBalance() {
-        viewModelScope.launch {
-            val balanceNew = useCase.currencyRepository.balance()
-            _balance.value = balanceNew
-        }
-
-    }
 }

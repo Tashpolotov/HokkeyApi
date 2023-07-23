@@ -40,7 +40,7 @@ class CoinFragment : Fragment() {
                 viewModel.increaseBalance()
                 animateCoin()
                 viewModel.loadBalance()
-                viewModel.updateBalance()
+
             }
 
             override fun onShakeStopped() {
